@@ -7,9 +7,7 @@ new Vue({
     el: '#app',
     data: {
         me: 100,
-        myHealthbar: '100%',
         monster: 100,
-        monsterHealthbar: '100%',
         battleBtnVis: false,
         restartBtnVis: true,
         logVis: false,
@@ -52,7 +50,6 @@ new Vue({
             
             this.monsterAtack(monDmg)
             
-            this.changeHealthbar()
             this.checkWhoWin()
         },
         monsterAtack(dmg){
@@ -61,15 +58,10 @@ new Vue({
         restart(){
             this.me = 100,
             this.monster = 100,
-            this.changeHealthbar()
             this.battleBtnVis = !this.battleBtnVis
             this.restartBtnVis = !this.restartBtnVis
             this.logVis = true
             this.log = []
-        },
-        changeHealthbar(){
-            this.myHealthbar = this.me + '%',
-            this.monsterHealthbar = this.monster + '%'
         },
         checkWhoWin(){
             if (this.me <= 0) {
