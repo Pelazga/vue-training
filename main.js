@@ -9,7 +9,6 @@ new Vue({
         me: 100,
         monster: 100,
         gameIsRuning: false,
-        logVis: false,
         log:[
         ]
     },
@@ -18,54 +17,57 @@ new Vue({
     },
     methods: {
         giveUp(){
-            alert('Shame on You, looser!')
-            this.gameIsRuning = !this.gameIsRuning           
+            alert('Shame on You, looser!');
+            this.gameIsRuning = !this.gameIsRuning;      
         },
         performTurn(minHerDmg, maxHerDmg, flag){
-            let monDmg = getRandom(5, 15)
-            let herDmg = getRandom(minHerDmg, maxHerDmg)
-            let stringtoLog = ''
+            let monDmg = getRandom(5, 15);
+            let herDmg = getRandom(minHerDmg, maxHerDmg);
+            let stringtoLog = '';
             
             switch (flag) {
                 case 'atack':
-                    stringtoLog = 'Heroe dealed ' + herDmg + ' damage.'
-                    this.monster -= herDmg
+                    stringtoLog = 'Heroe dealed ' + herDmg + ' damage.';
+                    this.monster -= herDmg;
+                    break;
+                case 'specialAtack':
+                    stringtoLog = 'Heroe hit hard! Monster gets ' + herDmg + ' damage.';
+                    this.monster -= herDmg;
                     break;
                 case 'heal':
-                    stringtoLog = 'Heroe healed ' + herDmg + ' HP.'
-                    this.me += herDmg
+                    stringtoLog = 'Heroe healed himself' + herDmg + ' HP.';
+                    this.me += herDmg;
                     if (this.me > 100){
                         this.me = 100;
                     }
                     break;
                 default:
-                    stringtoLog = 'Wrong flag'
+                    stringtoLog = 'Wrong flag';
                     break;
             }
             
-            this.addToLog(stringtoLog, monDmg)
+            this.addToLog(stringtoLog, monDmg);
             
-            this.monsterAtack(monDmg)
+            this.monsterAtack(monDmg);
             
-            this.checkWhoWin()
+            this.checkWhoWin();
         },
         monsterAtack(dmg){
-            this.me -= dmg
+            this.me -= dmg;
         },
         restart(){
-            this.me = 100,
-            this.monster = 100,
-            this.gameIsRuning = !this.gameIsRuning
-            this.logVis = true
-            this.log = []
+            this.me = 100;
+            this.monster = 100;
+            this.gameIsRuning = !this.gameIsRuning;
+            this.log = [];
         },
         checkWhoWin(){
             if (this.me <= 0) {
-                alert('Monster win!'),
-                this.gameIsRuning = !this.gameIsRuning
+                alert('Monster win!');
+                this.gameIsRuning = !this.gameIsRuning;
             } if (this.monster <= 0) {
-                alert('Player win!')
-                this.gameIsRuning = !this.gameIsRuning
+                alert('Player win!');
+                this.gameIsRuning = !this.gameIsRuning;
             }
         },
         addToLog(herDmg, monDmg){
@@ -74,10 +76,10 @@ new Vue({
                 'monster-turn': '',
             };
 
-            tempObj['player-turn'] =  herDmg
-            tempObj['monster-turn'] =  'Monster dealed ' + monDmg + ' damage.'
+            tempObj['player-turn'] =  herDmg;
+            tempObj['monster-turn'] =  'Monster dealed ' + monDmg + ' damage.';
 
-            this.log.push(tempObj)
+            this.log.unshift(tempObj);
         }
     }
 })

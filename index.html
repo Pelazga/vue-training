@@ -34,12 +34,12 @@
         <section v-else class="row controls">
             <div class="small-12 columns">
                 <button @click="performTurn(1, 10, 'atack')" id="attack">ATTACK</button>
-                <button @click="performTurn(10, 15, 'atack')" id="special-attack">SPECIAL ATTACK</button>
+                <button @click="performTurn(10, 15, 'specialAtack')" id="special-attack">SPECIAL ATTACK</button>
                 <button @click="performTurn(10, 15, 'heal')" id="heal">HEAL</button>
                 <button @click="giveUp" id="give-up">GIVE UP</button>
             </div>
         </section>
-        <section v-if="logVis"  class="row log">
+        <section v-if="log.length > 0"  class="row log">
             <div class="small-12 columns">
                 <ul v-for="turn in log" class="turn">
                     <li v-for="(dmg, i) in turn" :class=" i "> {{ dmg }}</li>
