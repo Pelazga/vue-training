@@ -26,12 +26,12 @@
                 </div>
             </div>
         </section>
-        <section v-if="restartBtnVis" class="row controls">
+        <section v-if="!gameIsRuning" class="row controls">
             <div class="small-12 columns">
                 <button @click="restart" id="start-game">START NEW GAME</button>
             </div>
         </section>
-        <section v-if="battleBtnVis" class="row controls">
+        <section v-else class="row controls">
             <div class="small-12 columns">
                 <button @click="performTurn(1, 10, 'atack')" id="attack">ATTACK</button>
                 <button @click="performTurn(10, 15, 'atack')" id="special-attack">SPECIAL ATTACK</button>

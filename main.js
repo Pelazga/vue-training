@@ -8,8 +8,7 @@ new Vue({
     data: {
         me: 100,
         monster: 100,
-        battleBtnVis: false,
-        restartBtnVis: true,
+        gameIsRuning: false,
         logVis: false,
         log:[
         ]
@@ -20,9 +19,7 @@ new Vue({
     methods: {
         giveUp(){
             alert('Shame on You, looser!')
-            this.battleBtnVis = !this.battleBtnVis
-            this.restartBtnVis = !this.restartBtnVis
-            
+            this.gameIsRuning = !this.gameIsRuning           
         },
         performTurn(minHerDmg, maxHerDmg, flag){
             let monDmg = getRandom(5, 15)
@@ -32,11 +29,11 @@ new Vue({
             switch (flag) {
                 case 'atack':
                     stringtoLog = 'Heroe dealed ' + herDmg + ' damage.'
-                    this.monster = this.monster - herDmg
+                    this.monster -= herDmg
                     break;
                 case 'heal':
                     stringtoLog = 'Heroe healed ' + herDmg + ' HP.'
-                    this.me = this.me + herDmg
+                    this.me += herDmg
                     if (this.me > 100){
                         this.me = 100;
                     }
@@ -53,25 +50,22 @@ new Vue({
             this.checkWhoWin()
         },
         monsterAtack(dmg){
-            this.me = this.me - dmg
+            this.me -= dmg
         },
         restart(){
             this.me = 100,
             this.monster = 100,
-            this.battleBtnVis = !this.battleBtnVis
-            this.restartBtnVis = !this.restartBtnVis
+            this.gameIsRuning = !this.gameIsRuning
             this.logVis = true
             this.log = []
         },
         checkWhoWin(){
             if (this.me <= 0) {
                 alert('Monster win!'),
-                this.battleBtnVis = !this.battleBtnVis
-                this.restartBtnVis = !this.restartBtnVis
+                this.gameIsRuning = !this.gameIsRuning
             } if (this.monster <= 0) {
                 alert('Player win!')
-                this.battleBtnVis = !this.battleBtnVis
-                this.restartBtnVis = !this.restartBtnVis
+                this.gameIsRuning = !this.gameIsRuning
             }
         },
         addToLog(herDmg, monDmg){
